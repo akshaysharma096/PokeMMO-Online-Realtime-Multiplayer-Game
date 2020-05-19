@@ -13,6 +13,7 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 
+
 const server = http.createServer(app);
 const gameServer = new colyseus.Server({
     server: server,
@@ -37,6 +38,7 @@ gameServer.define("poke_world", PokeWorld)
 
 // register colyseus monitor AFTER registering your room handlers
 app.use("/colyseus", monitor(gameServer));
+app.disable('X-Powered-By');
 
 gameServer.listen(port);
 console.log(`Listening on ws://localhost:${port}`)
